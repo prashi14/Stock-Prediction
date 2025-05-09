@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stock Prediction</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<style>
+    body {
+        margin: 0;
+        line-height: normal;
+        background-image: url("{{ url_for('static', filename='bg.jpg') }}");
+        
+        margin-bottom: 0%;
+    }
+
+    .homepage-1 {
+        margin-bottom: 0;
+        position: relative;
+        width: 100%;
+        height: 731px;
+        background-image: url("{{ url_for('static', filename='bg.jpg') }}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top;
+    }
+
+    .rectangular {
+        border-radius: 25px;
+        background: #6dc8b1;
+        padding: 20px;
+        width: 315px;
+        height: 125px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .stock-predictor {
+        position: relative;
+        font-size: var(--font-size-xl);
+        font-family: var(--font-inter);
+        color: var(--color-black);
+        text-align: left;
+        float: left;
+        padding-left: 10px;
+    }
+
+    .rectangle-div {
+        margin-top: 5%;
+        position: relative;
+        background-color: #fff;
+        width: 100%;
+        height: 30px;
+        border-radius: 25px;
+        float: left;
+    }
+
+    .search {
+        display: flex;
+        align-items: center; 
+        width: 300px;
+        margin: 0 auto; 
+        border: 1px solid #ccc; 
+        border-radius: 10px; 
+        padding: 5px; 
+        float: right;
+        margin: 7px;
+        border: rgb(8, 85, 8);
+    }
+
+    .search input[type="text"] {
+        width: 275px;
+        height: 25px;
+        border-radius: 25px;
+        border: none;
+        text-align: center;
+    }
+    .search select {
+    width: 300px; 
+    height: 25px;
+    border-radius: 25px;
+    border: none;
+    text-align: center;
+}
+
+
+    .search button {
+        background-color: black;
+        color: #f2f2f2;
+        float: right;
+        padding: 5px 10px;
+        font-size: 12px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .search button:hover {
+        background-color: #e9ecef; 
+    }
+
+    i.fas.fa-search {
+        color: #495057;
+    }
+
+    @media (max-width: 600px) {
+        .rectangular {
+            width: 90%; 
+        }
+
+       
+        .stock-predictor {
+            font-size: 16px; 
+        }
+    }
+</style>
+</head>
+<body>
+<form action="{{ url_for('result') }}" method="POST">
+    <div class="homepage-1">
+        <div class="rectangular">
+            <div class="stock-predictor">
+                <h1>Stock Prediction</h1>
+            </div>
+            <div class="search">
+                <label for="Dropdown"></label>
+                <select name="search">
+                    <option value="TCS">TCS</option>
+                    <option value="INFY">INFY</option>
+                    <option value="ICICI">ICICI</option>
+                    <option value="Reliance">RELIANCE</option>
+                    <option value="HDFC">HDFC</option>
+                </select>
+                <button type="submit">
+                    <i class="fas fa-search" onclick="search()"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
