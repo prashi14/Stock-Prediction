@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOCK ANALYTICS</title>
+</head>
+<style>
+    html{
+    box-sizing: border-box; 
+    font-size: 10px; 
+}
+
+*, *:before, *:after { 
+    box-sizing: inherit; 
+}
+
+body, ul, li  { 
+    margin: 0; 
+    padding: 0; 
+}
+
+li { 
+    list-style: none; 
+}
+
+a { 
+    text-decoration: none; 
+    text-align: center;
+}
+a h1{
+    font-size: 35px;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: inherit;
+    max-width: 1600px;
+    padding: 0 15px;
+    background-color: whitesmoke;
+    color: rgb(108, 122, 137);
+}
+
+.header{
+    padding: 30px 30px;
+    font-weight: 600;
+    font-size: 10px;
+    border-bottom:2px solid black;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+    /* background-image: url('background.jpg');
+    background-size: cover; /* 
+    /* or "contain" depending on your needs */ 
+    /* background-repeat: no-repeat;
+    background-position: center; */ 
+    background-image: linear-gradient(to right, #00A9C6, #005791); 
+    /* Example gradient colors */
+    color: white;
+     /* Set text color to contrast with the gradient */
+}
+header h3{
+    align-items: center;
+    font-size: 50px;
+    font-weight: 500;
+}
+.header a{
+    text-align: center;
+    color: #0C0A3E;
+}
+.sub-header{
+    margin: 20px 0;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #63aed6;
+}
+
+.today_data{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 100px;
+}
+
+.data_card{
+    width: 229.16px;
+    height: inherit;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-left: 15px;
+}
+
+.data_card span{
+    margin-top: 6px;
+}
+
+.blue-background{
+    /* background-color: #2f4a99; */
+    background-color: #0C0A3E;
+}
+
+.green-background{
+    /* background-color: #0c6103; */
+    background-color: #00346E;
+}
+
+.red-background{
+    /* background-color: #940404; */
+    background-color: #005D96;
+}
+
+.yellow-background{
+    /* background-color: #f09707; */
+    background-color: #0089B0;
+}
+
+.recent_trends{
+    margin: 20px 0;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #63aed6;
+    width: inherit;
+}
+
+.trend-img{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+}
+
+.trend-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.model-cards{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 10px;
+    margin: 20px 0;
+    padding: 12px 0;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card h4{
+    /* color: #63aed6; */
+    color: #621A55;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 0;
+    letter-spacing: 1px;
+}
+
+.card p{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.prediction-cards{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    color: white;
+    margin: 0 30px;
+}
+
+.prediction-card{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    border-radius: 5px;
+    padding: 0 20px;
+    align-items: flex-end;
+}
+
+.prediction-card h3{
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.prediction-card p{
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.recent_headlines{
+    margin: 30px 0;
+    padding-left: 20px;
+}
+
+.headlines-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+}
+
+.headlines-title img{
+    height: 100%;
+    object-fit: contain;
+}
+
+.headlines-title h1{
+    font-size: 20px;
+    font-weight: 600;
+    color: #63aed6;
+}
+
+.news-scroll{
+    margin-top: 20px;
+    height: 300px;
+    overflow-y: scroll;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12),
+                0 2px 2px rgba(0,0,0,0.12), 
+                0 4px 4px rgba(0,0,0,0.12), 
+                0 8px 8px rgba(0,0,0,0.12),
+                0 16px 16px rgba(0,0,0,0.12);
+    font-size: 11px;
+}
+
+html{
+    box-sizing: border-box; 
+    font-size: 10px; 
+}
+
+*, *:before, *:after { 
+    box-sizing: inherit; 
+}
+
+body, ul, li  { 
+    margin: 0; 
+    padding: 0; 
+}
+
+li { 
+    list-style: none; 
+}
+
+a { 
+    text-decoration: none; 
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: inherit;
+    max-width: 1600px;
+    padding: 0 15px;
+    background-color: whitesmoke;
+    color: rgb(108, 122, 137);
+}
+
+.header{
+    padding: 30px 30px;
+    font-weight: 600;
+    font-size: 30px;
+    border-bottom:2px solid black;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.sub-header{
+    margin: 20px 0;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #63aed6;
+}
+
+.today_data{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 100px;
+}
+
+.data_card{
+    width: 229.16px;
+    height: inherit;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-left: 15px;
+}
+
+.data_card span{
+    margin-top: 6px;
+}
+
+.blue-background{
+    background-color: #2f4a99;
+}
+
+.yellow-background{
+    background-color: #f09707;
+}
+
+.green-background{
+    background-color: #0c6103;
+}
+
+.red-background{
+    background-color: #940404;
+}
+
+.recent_trends{
+    margin: 20px 0;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #63aed6;
+    width: inherit;
+}
+
+.trend-img{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+}
+
+.trend-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.model-cards{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 10px;
+    margin: 20px 0;
+    padding: 12px 0;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card h4{
+    color: #63aed6;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 0;
+    letter-spacing: 1px;
+}
+
+.card p{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.prediction-cards{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    color: white;
+    margin: 0 30px;
+}
+
+.prediction-card{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    border-radius: 5px;
+    padding: 0 20px;
+    align-items: flex-end;
+}
+
+.prediction-card h3{
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.prediction-card p{
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.recent_headlines{
+    margin: 30px 0;
+    padding-left: 20px;
+}
+
+.headlines-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+}
+
+.headlines-title img{
+    height: 100%;
+    object-fit: contain;
+}
+
+.headlines-title h1{
+    font-size: 20px;
+    font-weight: 600;
+    color: #63aed6;
+}
+
+.news-scroll{
+    margin-top: 20px;
+    height: 300px;
+    overflow-y: scroll;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12),
+                0 2px 2px rgba(0,0,0,0.12), 
+                0 4px 4px rgba(0,0,0,0.12), 
+                0 8px 8px rgba(0,0,0,0.12),
+                0 16px 16px rgba(0,0,0,0.12);
+    font-size: 11px;
+}
+
+.sentiment-div{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+}
+
+.sentiment-div h1{
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #63aed6;
+}
+
+.sentiment-row2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 100px;
+}
+
+.sentiment-pie{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    margin-right: 180px;
+}
+
+.overall-sentiment{
+    color: white;
+    background-color: #2f4a99;
+    height: 100px;
+    width: 600px;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.overall-sentiment h1{
+    margin: 0;
+}
+
+.overall-sentiment p{
+    font-size: 13px;
+}
+
+.forecast-result{
+    background-color:#2f4a99;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    margin: 30px;
+    font-weight: 600;
+    padding: 30px;
+}
+
+.header a{
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-right: 30px;
+}
+
+.forecast-div h1{
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #63aed6;
+}
+
+.forecast-div table{
+    padding-left: 70px;
+    padding-right: 70px;
+    width: 100%;
+}
+
+.forecast-div th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.forecast-div img{
+    height: 180px;
+    object-fit: contain;
+}
+
+.forecast-div td{
+    font-size: 17px;
+}
+
+.first-column{
+    width: 30%;
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html">BACK  <h1>STOCK ANALYTICS</h1></a>
+        </div>
+        <div class="model-cards">
+            <div class="card">
+                <h4>RANDOM FOREST MODEL ACCURACY</h4>
+                <div class="card-img">
+                    <img src="{{url_for('static',filename='rfplot.png')}}" />
+                </div>
+                <p>ACCURACY FOR THE MODEL: {{arf}}</p>
+            </div>
+            <div class="card">
+                <h4>LINEAR REGRESSION MODEL ACCURACY</h4>
+                <div class="card-img">
+                    <img src="{{url_for('static',filename='lrplot.png')}}" />
+                </div>
+                <p>ACCURACY FOR THE MODEL: {{alr}}</p>
+            </div>
+            <div class="card">
+                <h4>LSTM MODEL ACCURACY</h4>
+                <div class="card-img">
+                    <img src="{{url_for('static',filename='lstmplot.png')}}" />    
+                </div>
+                <p>ACCURACY FOR THE MODEL: {{alstm}}</p>
+            </div>
+            <div class="card">
+                <h4>ARIMA MODEL ACCURACY</h4>
+                <div class="card-img">
+                    <img src="{{url_for('static',filename='arplot.png')}}" />
+                </div>
+                <p>ACCURACY FOR THE MODEL: {{aar}}</p>
+            </div>
+            
+        </div>
+        <div class="prediction-cards">
+            <div class="prediction-card blue-background">
+                <h3>{{lr_pred}}</h3>
+                <p>TOMMOROW'S CLOSING PRICE PREDICTED BY LR</p>
+            </div>
+            <div class="prediction-card green-background">
+                <h3>{{lstm_pred}}</h3>
+                <p>TOMMOROW'S CLOSING PRICE PREDICTED BY LSTM</p>
+            </div>
+            <div class="prediction-card red-background">
+                <h3>{{arima_pred}}</h3>
+                <p>TOMMOROW'S CLOSING PRICE PREDICTED BY ARIMA</p>
+            </div>
+            <div class="prediction-card yellow-background">
+                <h3>{{rf_pred}}</h3>
+                <p>TOMMOROW'S CLOSING PRICE PREDICTED BY RF</p>
+            </div>
+        </div>
+
+<div class="recent_headlines">
+            <div class="headlines-title"><img src="https://github.com/Prashigarg/stock-prediction-app-project/blob/master/static/newsLogo.png?raw=true"><h1>RECENT NEWS HEADLINES ABOUT {{quote}}</h1></div>
+            <div class="news-scroll">
+                {%for i in range(total_items)%}
+                    <p>{{news_list[i]}}</p>
+                {%endfor%} 
+            </div>
+        </div>
+        <div class="sentiment-div">
+            <h1>SENTIMENT ANALYSIS FOR {{quote}} NEWS</h1>
+            <div class="sentiment-row2">
+                <div class="sentiment-pie">
+                    <img src="{{url_for('static',filename='piechart.png')}}", height=350px, width=450px />
+                </div>
+                <div class="overall-sentiment">
+                    <h1>{{fin_head}}</h1>  
+                    <p>OVERALL NEWS POLARITY</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="forecast-result">
+            According to the ML Predictions & Sentiment Analysis of the news headlines, a <b>{{idea}}</b> in <b>{{quote}}</b> stock is expected => <b>{{decision}}</b>
+        </div>
+    </div>
+</body>
+</html>

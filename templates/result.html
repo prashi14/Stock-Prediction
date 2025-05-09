@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Button Redirection</title>
+    <script>
+        function redirectToFinalRes() {
+            window.location.href = "finalres.html";
+        }
+
+        function redirectToKnow() {
+            window.location.href = "know.html";
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            line-height: normal;
+            position: relative;
+            width: 100%;
+            height: 731px;
+            background-image: url("{{ url_for('static', filename='bg.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+
+        .rectangular {
+            background: #8ec7b1;
+            border-radius: 25px;
+            width: 160px;
+            height: 100px;
+            margin-left: 12px;
+            position: absolute;
+            top: 38%;
+            left: 22%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rectangular1 {
+            background: #8ec7b1;
+            border-radius: 25px;
+            width: 160px;
+            height: 100px;
+            margin-left: 12px;
+            position: absolute;
+            top: 38%;
+            left: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rectangular2 {
+            background: #8ec7b1;
+            border-radius: 25px;
+            width: 160px;
+            height: 100px;
+            margin-left: 12px;
+            position: absolute;
+            top: 38%;
+            left: 58%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Nse, .bse, .stock-details {
+            font-size: var(--font-size-xl);
+            font-family: var(--font-inter);
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding-left: 10px;
+            text-decoration: none; 
+        }
+
+        @media (max-width: 600px) {
+            .rectangular,
+            .rectangular1,
+            .rectangular2,
+            .rectangular3 {
+                width: 100%;
+                left: 0;
+                margin-left: 0;
+            }
+
+            .rectangular1 {
+                top: 45%;
+            }
+
+            .rectangular2,
+            .rectangular3 {
+                top: 65%;
+            }
+
+            .Nse, .bse, .stock-details, .more {
+                font-size: 16px;
+                margin-top: 10px;
+                text-decoration: none; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+<a href="/home?type=nse" class="rectangular" onclick="home()">
+    <div class="NSE">NSE</div>
+</a>
+<a href="/home?type=bse" class="rectangular1" onclick="home()">
+    <div class="BSE">BSE</div>
+</a>
+
+<a href="/kmore?type=bse" class="rectangular2"  onclick="home()">
+    <div class="stock-details">KNOW MORE</div>
+</a>
+
+</body>
+</html>
